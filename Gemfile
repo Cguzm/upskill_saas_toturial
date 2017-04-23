@@ -45,7 +45,7 @@ group :development do
 end
 
 group :production do
-  # Use the PostgrepSQL gem for Heroku prodcution servers
+  # Use the PostgreSQL gem for Heroku prodcution servers
   gem 'pg', '0.18.4'
 end  
 
