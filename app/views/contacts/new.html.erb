@@ -4,7 +4,6 @@
     <div class="col-md-4 col-md-offset-4">
       <%= flash[:notice] %>
       <div class="well">
-        <form>
           <%= form_for @contact do |f| %>
             <div class="form-group">
               <%= f.label :name %>
@@ -22,7 +21,6 @@
             </div>
             <%= f.submit 'Submit', class: 'btn btn-default' %>
           <% end %>
-          </form>
         </div>
       </div>
     </div>
