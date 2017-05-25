@@ -12,7 +12,6 @@ ActionMailer::Base.smtp_settings = {
   :domain         => 'secret-oasis-85930.herokuapp.com',
   :authentication => :plain,
 }
-
 ActionMailer::Base.delivery_method = :smtp
 
 
