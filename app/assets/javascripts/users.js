@@ -11,6 +11,7 @@ $(document).on('turbolinks:load', function(){
   submitBtn.click(function(event){
   //prevent default submission behavior.  
     event.preventDefault();
+    submitBtn.val("Processing").prop('disable', true);
   
   //collect the credit card fields.
   var ccNum = $('#card_number').val(),
@@ -18,24 +19,52 @@ $(document).on('turbolinks:load', function(){
       expMonth = $('#card_month').val(),
       expYear = $('#card_year').val();
   
-  //send the card info to Stripe.
-  Stripe.createToken({
-    number: ccNum,
-    cvc: cvcNum,
-    exp_month: expMonth,
-    exp_year: expYear
-  }, stripe.ResponseHandler);
-    
-    
+  // Use Stripe JS library to check for card errors.
+  var error = false;
+  
+  //Validate card number.
+  if(!Stripe.card.validate.CardNumber(ccNum)) { 
+    error = true;
+    alert('The credit card number appears to be invalid');
+  }
+  
+  //Validate CVC number.
+  if(!Stripe.card.validate.CVC(cvcNum)) { 
+    error = true;
+    alert('The CVC number appears to be invalid');
+  }
+  
+    //Validate expiration date.
+  if(!Stripe.card.validate.Expiry(expMonth, expYear)) { 
+    error = true;
+    alert('The expiration date appears to be invalid');
+  }
+  
+  if (error) {
+    //If there are card errors, don't send to Stripe.
+    submitBtn.prop('disable', false).val("Sign up");
+  } else {
+    //send the card info to Stripe.
+    Stripe.createToken({
+      number: ccNum,
+      cvc: cvcNum,
+      exp_month: expMonth,
+      exp_year: expYear
+    }, stripeResponseHandler);
+  }
+  
+  return false;
   });
   
-  //collect the credit card fields.
-  
-  //send the card info to Stripe.
-  
   //Stripe will return a card token.
-  
-  //Inject card token as a hidden field into form.
-  
-  //Submit form to our Rails app.
+  function stripeResponseHandler(status, response) {
+    //Get the token from the response
+    var token = response.id;
+    
+    //Inject card token as a hidden field into form.
+    theForm.append( $('<input type="hidden" name="user[stripe_card_token]">').val(token) );
+
+    // Submit form to our Rails app.
+    theForm.get(0).submit();
+  }
 });
