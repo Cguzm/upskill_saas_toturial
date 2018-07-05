@@ -2,6 +2,8 @@
     <h1>Welcome to DevMatch</h1>
     <h3>A membership site where entrepreneurs can meet developers.</h3>
 </div>
+
+<div class="container-fluid">
 <div class="container home-signup-links">
   <div class= "row">
     <% if user_signed_in? %>
@@ -24,7 +26,7 @@
           <%= link_to "Visit the community", users_path , class: 'btn btn-default btn-lg btn-block' %>
         </div>
       </div>
-    <% else %>  
+    <% else %>
       <div class= "col-md-6">
         <div class="well">
           <h2 class="text-center">Basic Membership</h2>
@@ -40,6 +42,28 @@
             <%= link_to "Sign up with Pro", new_user_registration_path(plan: @pro_plan.id), class: 'btn btn-success btn-lg btn-block'  %>
         </div>
       </div>
+      </div>
     <% end %>  
+  </di>
+  
+  <div class="col-md-4">
+    <div class="well">
+      <h1 class="text-center">New Generation</h1>
+      <%= link_to "test", "#", class: 'btn btn-success btn-lg btn-block'%>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="well">
+      <h1 class="text-center">Technology</h1>
+      <%= link_to "test", "#", class: 'btn btn-success btn-lg btn-block'%>
+    </div>
+  </div>
+  <div class="col-md-4">
+      <div class="well">
+      <h1 class="text-center">Industry</h1>
+      <%= link_to "test", "#", class: 'btn btn-success btn-lg btn-block' %> 
+      </div>
+  </div>
   </div>
 </div>
+
