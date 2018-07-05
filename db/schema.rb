@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20170607192917) do
+=======
+ActiveRecord::Schema.define(version: 20170605210422) do
+>>>>>>> ff1640ec694db5ed15b9b58981c4f6f6419550a2
 
   create_table "contacts", force: :cascade do |t|
     t.string   "name"
@@ -56,8 +60,13 @@ ActiveRecord::Schema.define(version: 20170607192917) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+<<<<<<< HEAD
     t.string   "stripe_customer_token"
     t.integer  "plan_id"
+=======
+    t.integer  "plan_id"
+    t.string   "stripe_customer_token"
+>>>>>>> ff1640ec694db5ed15b9b58981c4f6f6419550a2
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
